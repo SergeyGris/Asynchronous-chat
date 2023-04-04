@@ -6,8 +6,8 @@
 lst = ["class", "function", "method"]
 
 
-def encoder(str):
-    return f'{type(bytes(str, "utf-8"))}, {bytes(str, "utf-8")}, {len(bytes(str, "utf-8"))}'
+def encoder(s):
+    return f'{type(bytes(s, "utf-8"))}, {bytes(str, "utf-8")}, {len(bytes(str, "utf-8"))}'
 
 
 for word in lst:

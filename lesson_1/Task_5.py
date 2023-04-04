@@ -3,6 +3,7 @@
 """
 
 import subprocess
+import chardet
 
 args = {
     1: ['ping', 'yandex.ru'],
@@ -13,6 +14,7 @@ for arg in args.values():
     subproc_ping1 = subprocess.Popen(arg, stdout=subprocess.PIPE)
 
     for line in subproc_ping1.stdout:
+        rez = chardet.detect(line)
         print(line.decode('cp866').encode('utf-8').decode('utf-8'))
 
 """

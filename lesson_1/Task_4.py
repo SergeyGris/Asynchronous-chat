@@ -7,8 +7,8 @@
 lst = ["разработка", "администрирование", "protocol", "standard"]
 
 
-def encoder(str):
-    return f'{str.encode("utf-8").decode("utf-8")}, {str.encode("utf-8")}'
+def encoder(s):
+    return f'{s.encode("utf-8").decode("utf-8")}, {s.encode("utf-8")}'
 
 
 for word in lst:
