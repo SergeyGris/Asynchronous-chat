@@ -28,16 +28,16 @@ def create_connection(hostname: str = 'localhost', port: int = 7777):
 
 def close_connection(connect: socket):
     connect.close()
-    print('connection closed')
+    return 'connection closed'
 
 
 def send_message(connect: socket, message: dict):
     decode_message = json.dumps(message).encode('utf-8')
     try:
         connect.send(decode_message)
-        print('Message was sent')
+        return 'Message was sent'
     except:
-        print('Something went wrong')
+        return 'Something went wrong'
 
 
 def create_presence(account_name='Guest'):
@@ -46,7 +46,6 @@ def create_presence(account_name='Guest'):
         'time': time.ctime(time.time()),
         'user': account_name,
     }
-    print(f'message was created: {action}')
     return action
 
 
@@ -55,7 +54,7 @@ def get_response(connect: socket):
     if isinstance(encoded_response, bytes):
         json_response = encoded_response.decode('utf-8')
         response = json.loads(json_response)
-        print(f'Кesponse was got: {response}')
+        print(f'Response was got: {response}')
         if isinstance(response, dict):
             return response
         raise ValueError
@@ -71,7 +70,6 @@ def verify_message(message):
 
 
 def main():
-
     try:
         hostname = sys.argv[1]
         port = int(sys.argv[2])
@@ -89,9 +87,10 @@ def main():
     try:
         answer = verify_message(get_response(connection))
         print(answer)
+        close_connection(connection)
     except (ValueError, json.JSONDecodeError):
         print('Decoding is failed')
-    close_connection(connection)
+        close_connection(connection)
 
 
 if __name__ == '__main__':

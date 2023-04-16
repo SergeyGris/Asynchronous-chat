@@ -15,9 +15,9 @@
 import json
 import sys
 from socket import *
-import time
 
-from client import get_message, get_response, send_message
+
+from lesson_3.client import get_response, send_message
 
 
 def verify_client_message(message):
@@ -27,7 +27,7 @@ def verify_client_message(message):
             'response': 200
         }
 
-    print(f'Bad request')
+
     return {
         'response': 400,
     }
@@ -62,7 +62,7 @@ def main():
     connection = socket(AF_INET, SOCK_STREAM)
     connection.bind((hostname, port))
 
-    connection.listen(1)
+    connection.listen(5)
 
     while True:
         client, client_address = connection.accept()
