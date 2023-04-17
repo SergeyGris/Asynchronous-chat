@@ -5,7 +5,7 @@ import sys
 import argparse
 import json
 import logging
-import logs.config_server_log
+import logs.server_log_config
 from errors import IncorrectDataRecivedError
 from common.variables import ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, \
     RESPONSE, DEFAULT_PORT, MAX_CONNECTIONS, ERROR
@@ -73,9 +73,9 @@ def main():
         client, client_address = transport.accept()
         SERVER_LOGGER.info(f'Установлено соедение с ПК {client_address}')
         try:
-            message_from_cient = get_message(client)
-            SERVER_LOGGER.debug(f'Получено сообщение {message_from_cient}')
-            response = process_client_message(message_from_cient)
+            message_from_client = get_message(client)
+            SERVER_LOGGER.debug(f'Получено сообщение {message_from_client}')
+            response = process_client_message(message_from_client)
             SERVER_LOGGER.info(f'Cформирован ответ клиенту {response}')
             send_message(client, response)
             SERVER_LOGGER.debug(f'Соединение с клиентом {client_address} закрывается.')
