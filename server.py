@@ -79,15 +79,15 @@ def main():
             SERVER_LOGGER.info(f'Cформирован ответ клиенту {response}')
             send_message(client, response)
             SERVER_LOGGER.debug(f'Соединение с клиентом {client_address} закрывается.')
-            client.close()
         except json.JSONDecodeError:
             SERVER_LOGGER.error(f'Не удалось декодировать JSON строку, полученную от '
                                 f'клиента {client_address}. Соединение закрывается.')
-            client.close()
         except IncorrectDataRecivedError:
             SERVER_LOGGER.error(f'От клиента {client_address} приняты некорректные данные. '
                                 f'Соединение закрывается.')
+        finally:
             client.close()
+
 
 
 if __name__ == '__main__':
